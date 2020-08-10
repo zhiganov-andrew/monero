@@ -268,7 +268,7 @@ namespace rct {
         keyV rv(rows);
         size_t i = 0;
         for (i = 0 ; i < rows ; i++) {
-            skGen(rv[i]);
+            rv[i] = rct::identity();//skGen(rv[i]);
         }
         return rv;
     }

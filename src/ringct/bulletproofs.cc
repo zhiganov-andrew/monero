@@ -569,7 +569,7 @@ try_again:
 
   PERF_TIMER_START_BP(PROVE_step1);
   // PAPER LINES 43-44
-  rct::key alpha = rct::skGen();
+  rct::key alpha = rct::identity();//rct::skGen();
   rct::key ve = vector_exponent(aL8, aR8);
   rct::key A;
   sc_mul(tmp.bytes, alpha.bytes, INV_EIGHT.bytes);
@@ -577,7 +577,7 @@ try_again:
 
   // PAPER LINES 45-47
   rct::keyV sL = rct::skvGen(MN), sR = rct::skvGen(MN);
-  rct::key rho = rct::skGen();
+  rct::key rho = rct::identity();//rct::skGen();
   ve = vector_exponent(sL, sR);
   rct::key S;
   rct::addKeys(S, ve, rct::scalarmultBase(rho));
@@ -633,7 +633,7 @@ try_again:
 
   PERF_TIMER_START_BP(PROVE_step2);
   // PAPER LINES 52-53
-  rct::key tau1 = rct::skGen(), tau2 = rct::skGen();
+  rct::key tau1 = rct::identity(), tau2 = rct::identity(); //rct::skGen(), tau2 = rct::skGen();
 
   rct::key T1, T2;
   ge_p3 p3;

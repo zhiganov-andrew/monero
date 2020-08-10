@@ -12,7 +12,7 @@ int main() {
 
     rct::key message = rct::key({88,16,250,110,68,200,105,13,117,253,153,111,246,79,59,255,164,151,114,184,193,103,167,100,93,189,143,211,217,45,238,47});
     rct::ctkeyV inSk = rct::ctkeyV();
-    inSk.push_back(rct::ctkey());
+    inSk.push_back(rct::ctkey({dest:rct::key(), mask:rct::key()}));
     std::vector<key> destinations;
     std::vector<xmr_amount> inamounts;
     std::vector<xmr_amount> outamounts;
