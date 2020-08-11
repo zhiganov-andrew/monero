@@ -88,11 +88,18 @@ int main() {
     index.push_back(2);
 
     ctkeyV outSk;
-    RCTConfig rct_config;
-    hw::core::device_default* hwdev = new hw::core::device_default();
+    RCTConfig rct_config {
+            rct::RangeProofPaddedBulletproof,
+            2
+    };
+
+//    hw::core::device_default hwdev = new hw::core::device_default();
+    hw::device *m_device = &hw::get_device("default");
+    m_device->set_mode(hw::device::TRANSACTION_CREATE_REAL);
+
     rctSig sig;
 
-    sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, (hw::device &) hwdev);
+    sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, (hw::device &)m_device);
 
     return 0;
 }
