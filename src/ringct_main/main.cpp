@@ -102,11 +102,15 @@ int main() {
     sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, m_device);
     bool res1 = rct::verRctNonSemanticsSimple(sig);
     bool res2 = rct::verRctSimple(sig);
+    bool res3 = rct::verRctMGSimple(get_pre_mlsag_hash(sig, hw::get_device("default")), sig.p.MGs[0], mixRing[0], sig.get_pseudo_outs()[0]);
     if(res1) {
         std::cout << "res1==true" << std::endl;
     }
     if(res2){
         std::cout << "res2==true" << std::endl;
+    }
+    if(res3){
+        std::cout << "res3==true" << std::endl;
     }
 
     std::cout << "finish" << std::endl;

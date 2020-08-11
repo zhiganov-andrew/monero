@@ -282,7 +282,7 @@ namespace rct {
 
     //generates a random secret and corresponding public key
     void skpkGen(key &sk, key &pk) {
-        key sk = rct::identity();// skGen(sk); todo
+        sk = rct::identity();// skGen(sk); todo
         scalarmultBase(pk, sk);
     }
 
