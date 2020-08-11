@@ -914,8 +914,8 @@ bool bulletproof_VERIFY(const std::vector<const Bulletproof*> &proofs)
     CHECK_AND_ASSERT_MES(proof.L.size() == 6+pd.logM, false, "Proof is not the expected size");
     const size_t M = 1 << pd.logM;
     const size_t MN = M*N;
-    const rct::key weight_y = rct::skGen();
-    const rct::key weight_z = rct::skGen();
+    const rct::key weight_y = rct::identity();//rct::skGen();todo
+    const rct::key weight_z = rct::identity();//rct::skGen();
 
     // pre-multiply some points by 8
     proof8_V.resize(proof.V.size()); for (size_t i = 0; i < proof.V.size(); ++i) rct::scalarmult8(proof8_V[i], proof.V[i]);
@@ -1069,7 +1069,10 @@ bool bulletproof_VERIFY(const std::vector<const Bulletproof*> &proofs)
     multiexp_data[i * 2] = {m_z4[i], Gi_p3[i]};
     multiexp_data[i * 2 + 1] = {m_z5[i], Hi_p3[i]};
   }
-  if (!(multiexp(multiexp_data, 2 * maxMN) == rct::identity()))
+
+  rct::key tempKey = multiexp(multiexp_data, 2 * maxMN);
+
+  if (!(tempKey == rct::identity()))
   {
     PERF_TIMER_STOP_BP(VERIFY_step2_check);
     MERROR("Verification failure");

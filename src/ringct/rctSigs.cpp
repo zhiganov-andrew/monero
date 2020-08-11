@@ -890,7 +890,9 @@ namespace rct {
         if (msout)
           msout->c.resize(inamounts.size());
         for (i = 0 ; i < inamounts.size(); i++) {
-            rv.p.MGs[i] = proveRctMGSimple(full_message, rv.mixRing[i], inSk[i], a[i], pseudoOuts[i], kLRki ? &(*kLRki)[i]: NULL, msout ? &msout->c[i] : NULL, index[i], hwdev);
+            rct::mgSig mgsig;
+            mgsig = proveRctMGSimple(full_message, rv.mixRing[i], inSk[i], a[i], pseudoOuts[i], kLRki ? &(*kLRki)[i]: NULL, msout ? &msout->c[i] : NULL, index[i], hwdev);
+            rv.p.MGs[i] = mgsig;
         }
         return rv;
     }

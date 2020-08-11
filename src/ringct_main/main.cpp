@@ -101,5 +101,12 @@ int main() {
 
     sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, m_device);
 
+    bool res = rct::verRctSimple(sig);
+    if(res) {
+        std::cout << "res==true" << std::endl;
+    }
+
+    std::cout << "finish" << std::endl;
+
     return 0;
 }
