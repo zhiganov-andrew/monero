@@ -100,10 +100,13 @@ int main() {
     rctSig sig;
 
     sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, m_device);
-
-    bool res = rct::verRctSimple(sig);
-    if(res) {
-        std::cout << "res==true" << std::endl;
+    bool res1 = rct::verRctNonSemanticsSimple(sig);
+    bool res2 = rct::verRctSimple(sig);
+    if(res1) {
+        std::cout << "res1==true" << std::endl;
+    }
+    if(res2){
+        std::cout << "res2==true" << std::endl;
     }
 
     std::cout << "finish" << std::endl;
