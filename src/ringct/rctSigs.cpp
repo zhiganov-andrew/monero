@@ -211,7 +211,10 @@ namespace rct {
             else {
               hash_to_p3(Hi_p3, pk[index][i]);
               ge_p3_tobytes(Hi.bytes, &Hi_p3);
-              hwdev.mlsag_prepare(Hi, xx[i], alpha[i] , aG[i] , aHP[i] , rv.II[i]);
+//              hwdev.mlsag_prepare(Hi, xx[i], alpha[i] , aG[i] , aHP[i] , rv.II[i]);
+              rct::skpkGen(alpha[i], aG[i]);
+              rct::scalarmultKey(aHP[i], Hi, alpha[i]);
+              rct::scalarmultKey(rv.II[i], Hi, xx[i]);
               toHash[3 * i + 2] = aG[i];
               toHash[3 * i + 3] = aHP[i];
             }
@@ -225,7 +228,6 @@ namespace rct {
         }
 
         hwdev.mlsag_hash(toHash, c_old);
-
         
         i = (index + 1) % cols;
         if (i == 0) {
@@ -233,7 +235,7 @@ namespace rct {
         }
         while (i != index) {
 
-            rv.ss[i] = skvGen(rows);            
+            rv.ss[i] = skvGen(rows);  //todo
             sc_0(c.bytes);
             for (j = 0; j < dsRows; j++) {
                 addKeys2(L, rv.ss[i][j], c_old, pk[i][j]);

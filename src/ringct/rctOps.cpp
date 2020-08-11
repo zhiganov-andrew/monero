@@ -268,21 +268,21 @@ namespace rct {
         keyV rv(rows);
         size_t i = 0;
         for (i = 0 ; i < rows ; i++) {
-            rv[i] = rct::identity();//skGen(rv[i]);
+            rv[i] = rct::identity();//skGen(rv[i]); todo
         }
         return rv;
     }
 
     //generates a random curve point (for testing)
     key  pkGen() {
-        key sk = skGen();
+        key sk = rct::identity();//skGen(); todo
         key pk = scalarmultBase(sk);
         return pk;
     }
 
     //generates a random secret and corresponding public key
     void skpkGen(key &sk, key &pk) {
-        skGen(sk);
+        key sk = rct::identity();// skGen(sk); todo
         scalarmultBase(pk, sk);
     }
 
