@@ -94,12 +94,12 @@ int main() {
     };
 
 //    hw::core::device_default hwdev = new hw::core::device_default();
-    hw::device *m_device = &hw::get_device("default");
-    m_device->set_mode(hw::device::TRANSACTION_CREATE_REAL);
+    hw::device &m_device = hw::get_device("default");
+    m_device.set_mode(hw::device::TRANSACTION_CREATE_REAL);
 
     rctSig sig;
 
-    sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, (hw::device &)m_device);
+    sig = rct::genRctSimple(message, inSk, destinations, inamounts, outamounts, txnFee, mixRing, amount_keys, NULL, NULL, index, outSk, rct_config, m_device);
 
     return 0;
 }
